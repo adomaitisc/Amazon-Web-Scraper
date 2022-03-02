@@ -1,4 +1,9 @@
-package amazon;
+import java.io.IOException;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 public class Scraper {
 	
@@ -7,21 +12,37 @@ public class Scraper {
 	private String ID;
 	private String NAME;
 	private String PRICE;
+	private Document DOC;
 
 	public Scraper(String productURL) {
 		this.URL = productURL;
+		System.out.println("Scraper Running");
 		
-		//connect to document
-		//assign this.doc to html document
+		try {
+			this.DOC = Jsoup.connect(productURL)
+//					.header("Host", "www.amazon.com")
+					.header("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/15.3 Safari/605.1.15")
+//				    .header("Accept-Language", "en-US,en;q=0.9")
+//				    .header("Accept-Encoding", "gzip, deflate, br")
+//				    .header("Connection", "keep-alive")
+					.get();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
-	private boolean isAvailable() {
-		//see if price is on document
+	//See if price is on product page
+	public boolean isAvailable() {
 		return true;
 	}
 	
+	//See if price is on product page
+	public String getTitle() {
+		return DOC.title();
+	}
+	
+	//get an id for the product
 	private String getProductId() {
-		//get an id for the product
 		return "ID";
 	}
 	

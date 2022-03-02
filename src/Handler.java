@@ -1,4 +1,3 @@
-package amazon;
 
 public class Handler {
 

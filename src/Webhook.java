@@ -1,5 +1,3 @@
-package amazon;
-
 public class Webhook {
 
 	public Webhook() {
