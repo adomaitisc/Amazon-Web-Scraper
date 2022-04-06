@@ -12,7 +12,7 @@ public class Main {
 		
 		Scraper product = new Scraper(productURL, true);
 		
-		String webhookURL = "https://discord.com/api/webhooks/956575740395139152/v0gtahUBqd8rv4dCBLQfrrJ_mvku7Dazo0wDcm0MwluakgiOKZnMpaBbAq-c5oPs38rT";
+		String webhookURL = "https://discord.com/api/webhooks/943528557353762846/piYYPcg2SP1qJajPp8TAjnMaBW6Bkq_u2MwPelAi6ADeM9F9PqMcXbfZbg6GB-P-gUUp";
 		
 		String name_description = product.getName();
 		
