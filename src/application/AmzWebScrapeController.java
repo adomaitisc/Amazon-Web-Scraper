@@ -69,6 +69,7 @@ public class AmzWebScrapeController {
     final static int ONE_SECOND = 1000;
 	final static int TEN_SCEONDS = 10000;
 	final static int ONE_MINUTE = 60000;
+	final static int ONE_HOUR = 60*ONE_MINUTE;
 
     /**
      * initializes the app on startup
@@ -168,7 +169,7 @@ public class AmzWebScrapeController {
                 else
                 	System.out.println("NO ITEMS TO CHECK");
                 try {
-                    Thread.sleep(TEN_SCEONDS);
+                    Thread.sleep(ONE_HOUR);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
