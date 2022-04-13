@@ -12,13 +12,16 @@ public class Webhook {
 	private String description;
 	private String link;
 	private String[] fields;
+	
+	public Webhook() {
+		
+	}
     
-    public Webhook(String webhookURL, String productName, String productURL, String[] productPrices, boolean run) {
+    public Webhook(String webhookURL, String productName, String productURL, String[] productPrices) {
     	this.url = webhookURL;
     	this.description = productName;
     	this.link = productURL;
     	this.fields = productPrices;
-    	if(run) this.execute();
     }
     
     public void setURL(String newURL) {

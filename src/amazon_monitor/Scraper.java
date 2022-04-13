@@ -9,13 +9,12 @@ public class Scraper {
 	private String url;
 	private String id;
 	private String name;
+	private String description;
 	private String price;
-	
-//	private String imageURL;
 	
 	private Document HTML;
 
-	public Scraper(String productURL, boolean run) {
+	public Scraper(String productURL) {
 		this.url = productURL;
 		
 		try {
@@ -26,7 +25,7 @@ public class Scraper {
 			e.printStackTrace();
 		}
 		
-		if(run) this.execute();
+		this.execute();
 	}
 	
 	private void idFromURL() {
@@ -35,16 +34,28 @@ public class Scraper {
 	}
 	
 	private void scrapeName() {
-		this.name = HTML.select("span.a-size-large").first().text();
+		try {
+			this.name = HTML.select("span#productTitle").first().text();
+		} catch(Exception e) {
+			this.name = "Name is not available for this item.";
+		}
 	}
 	
 	private void scrapePrice() {
-		this.price = HTML.select("span.a-offscreen").first().text();
+		try {
+			this.price = HTML.select("span.a-offscreen").first().text();
+		} catch(Exception e) {
+			this.price = "Price is not available for this item.";
+		}
 	}
 	
-//	private void scrapeImage() {
-//		this.imageURL = 
-//	}
+	private void scrapeDescription() {
+		try {
+			this.description = HTML.select("div#productDescription").first().text();
+		} catch(Exception e) {
+			this.description = "Description is not available for this item.";
+		}
+	}
 	
 	public String getURL() {
 		return this.url;
@@ -57,18 +68,19 @@ public class Scraper {
 	public String getName() {
 		return this.name;
 	}
+	
+	public String getDescription() {
+		return this.description;
+	}
 
 	public String getPrice() {
 		return this.price;
 	}
 	
-//	public String getImage() {
-//		return this.imageURL;
-//	}
-	
 	public void execute() {
 		idFromURL();
 		scrapeName();
 		scrapePrice();
+		scrapeDescription();
 	}
 }
