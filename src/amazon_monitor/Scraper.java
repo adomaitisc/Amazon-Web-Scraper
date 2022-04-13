@@ -4,18 +4,20 @@ import java.io.IOException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
+import javafx.beans.property.SimpleStringProperty;
+
 public class Scraper {
 	
-	private String url;
-	private String id;
-	private String name;
-	private String description;
-	private String price;
+	SimpleStringProperty url;
+	SimpleStringProperty id;
+	SimpleStringProperty name;
+	SimpleStringProperty description;
+	SimpleStringProperty price;
 	
 	private Document HTML;
 
 	public Scraper(String productURL) {
-		this.url = productURL;
+		this.url = new SimpleStringProperty(productURL);
 		
 		try {
 			this.HTML = Jsoup.connect(productURL)
@@ -29,52 +31,52 @@ public class Scraper {
 	}
 	
 	private void idFromURL() {
-		String[] ids = this.url.split("/", 0);
-		this.id = ids[5];
+		String[] ids = this.url.get().split("/", 0);
+		this.id = new SimpleStringProperty(ids[5]);
 	}
 	
 	private void scrapeName() {
 		try {
-			this.name = HTML.select("span#productTitle").first().text();
+			this.name = new SimpleStringProperty(HTML.select("span#productTitle").first().text());
 		} catch(Exception e) {
-			this.name = "Name is not available for this item.";
+			this.name = new SimpleStringProperty("Name is not available for this item.");
 		}
 	}
 	
 	private void scrapePrice() {
 		try {
-			this.price = HTML.select("span.a-offscreen").first().text();
+			this.price = new SimpleStringProperty(HTML.select("span.a-offscreen").first().text());
 		} catch(Exception e) {
-			this.price = "Price is not available for this item.";
+			this.price = new SimpleStringProperty("Price is not available for this item.");
 		}
 	}
 	
 	private void scrapeDescription() {
 		try {
-			this.description = HTML.select("div#productDescription").first().text();
+			this.description = new SimpleStringProperty(HTML.select("div#productDescription").first().text());
 		} catch(Exception e) {
-			this.description = "Description is not available for this item.";
+			this.description = new SimpleStringProperty("Description is not available for this item.");
 		}
 	}
 	
 	public String getURL() {
-		return this.url;
+		return this.url.get();
 	}
 	
 	public String getId() {
-		return this.id;
+		return this.id.get();
 	}
 	
 	public String getName() {
-		return this.name;
+		return this.name.get();
 	}
 	
 	public String getDescription() {
-		return this.description;
+		return this.description.get();
 	}
 
 	public String getPrice() {
-		return this.price;
+		return this.price.get();
 	}
 	
 	public void execute() {
