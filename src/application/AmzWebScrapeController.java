@@ -106,7 +106,7 @@ public class AmzWebScrapeController {
         thread.start();
         /*
          * end of thread for price changes
-         */
+         */ 
     	
     }
     
